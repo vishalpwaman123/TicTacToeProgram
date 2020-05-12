@@ -289,6 +289,25 @@ function checkWin() {
 }
 
 
+ computerPlay() {
+	while [ true ]
+	do
+		computer_rows=$(( RANDOM % 3 ))
+   	computer_Columns=$(( RANDOM % 3 ))
+
+	   occupiedPositionCheck $computer_rows $computer_columns
+	
+   	if [[ $? -eq 0 ]]
+   	then
+      	filingBoard $computer_rows $computer_columns $compSymbol
+   	else
+      	echo "position is already occupied. try duffrent space"
+			continue
+   	fi
+	done
+}
+
+
 function playGame() {
         M=$1
 	while [ true ]
@@ -304,7 +323,7 @@ function playGame() {
 			fi
 			M=1
 		else
-			PlayerPlay $player2
+			ComputerPlay $player2
 			printBoard
 			checkWin
 			if [[ $? == 1 ]]
