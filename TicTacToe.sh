@@ -14,6 +14,23 @@
 }
 
 
+
+ printBoard() {
+	printf "\n~ Tic Tac Toe ~"
+	printf "\n-------------\n"
+	for (( row=0; row<ROWS; row++ ))
+	do
+		for ((column=0; column<COLUMNS; column++ ))
+		do
+			printf "| ${gameBoard[$row, $column]} "
+		done
+		printf "|\n-------------\n"
+	done
+}
+
+
+
+
 function Toss()
 {
 check=$(($RANDOM%2))
@@ -29,7 +46,7 @@ fi
 
 
 initBoard
-
+printBoard
 
 
 
