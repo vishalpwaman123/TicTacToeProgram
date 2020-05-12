@@ -285,7 +285,7 @@ function checkWin() {
             return 1
         fi
 
-	return 0
+	return 0;
 }
 
 function playerPlay() {
@@ -314,7 +314,7 @@ function computerPlay() {
    	computer_Columns=$(( RANDOM % 3 ))
 
 	   occupiedPositionCheck $computer_rows $computer_columns
-	
+
    	if [[ $? -eq 0 ]]
    	then
       	filingBoard $computer_rows $computer_columns $compSymbol
@@ -324,6 +324,12 @@ function computerPlay() {
    	fi
 	done
 }
+
+
+
+ 
+
+
 
 
 function playGame() {
