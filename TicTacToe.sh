@@ -254,19 +254,85 @@ function rightDiagonalFilliedCheck() {
 }
 
 
+function checkWin() {
+	checkVerticallyFilledBoard
+	resultForVericallyFillied=$?
 
-function Toss()
-{
-check=$(($RANDOM%2))
-if (( $check == 1 ))
-then
-	echo $check
-else
-	echo $check
-fi
+	checkHorizontallyFilledBoard
+	resultForHorizontallyFillied=$?
 
+	checkLeftDiagonal
+	resultFoLleftDiagonal=$?
+
+	checkRightDiagonal
+	resultForRightDiagonal=$?
+
+	if [[ $resultForVerticallyFilled -eq 1 || $resultForHorizontallyFilled -eq 1 || $resultForLeftDiagonal -eq 1 || $resultForRightDiagonal -eq 1 ]]
+	then
+		echo "player have Win the Game..!"
+		return 1	
+	fi
+
+	if [[ $resultForVerticallyFilled -eq 2 || $resultForHorizontallyFilled -eq 2 || $resultForLeftDiagonal -eq 2 || $resultForRightDiagonal -eq 2 ]]
+	then
+		echo "computer have win the Game..!"
+		return 1
+	fi
+
+	if [ $? -eq 1 ]
+        then
+            echo "Game is draw..!"
+            return 1
+        fi
+
+	return 0
 }
 
+
+function playGame() {
+        M=$1
+	while [ true ]
+	do
+		if [[ M == 0 ]]
+		then
+			playerPlay $player1
+			printBoard
+			checkWin			
+			if [[ $? == 1 ]]
+			then
+				break;
+			fi
+			M=1
+		else
+			PlayerPlay $player2
+			printBoard
+			checkWin
+			if [[ $? == 1 ]]
+			then 
+				break;
+			fi
+			M=0
+		fi
+	done 
+}
+
+
+
+ tossCoin() {
+	echo -e "\n press Enter to Toss a Coin :"
+	read ch
+	coin=$(( RANDOM % 2 ))
+
+	#flip coin
+	if (( $coin == 0 ))
+	then
+		echo "you are Playing First..."
+	else
+		echo "computer is Playing First..."
+	fi
+
+	playGame 
+}
 
 
 initBoard
