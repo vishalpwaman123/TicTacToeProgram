@@ -288,8 +288,26 @@ function checkWin() {
 	return 0
 }
 
+function playerPlay() {
+	while [ true ]
+	do
+		read -p "Enter Row : " player_row
+		read -p "Enter Column : " player_column
 
- computerPlay() {
+		occupiedPositionCheck $row $column
+
+		if [[ $? -eq 0 ]]
+		then
+			filingBoard $player_row $player_column $playerSymbol
+		else
+			echo "position is already Occupied, try diffrent space."
+			continue
+		fi
+	done
+}
+
+
+function computerPlay() {
 	while [ true ]
 	do
 		computer_rows=$(( RANDOM % 3 ))
